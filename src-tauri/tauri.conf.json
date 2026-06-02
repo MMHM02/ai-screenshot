@@ -1,0 +1,142 @@
+{
+  "build": {
+    "beforeDevCommand": "npm run dev",
+    "beforeBuildCommand": "npm run build",
+    "devPath": "http://localhost:1420",
+    "distDir": "../dist",
+    "withGlobalTauri": true
+  },
+  "package": {
+    "productName": "AI截屏",
+    "version": "1.0.0"
+  },
+  "tauri": {
+    "allowlist": {
+      "all": true,
+      "window": {
+        "all": true,
+        "create": true,
+        "center": true,
+        "setAlwaysOnTop": true,
+        "setResizable": true,
+        "setMinimizable": true,
+        "setMaximizable": true,
+        "setClosable": true,
+        "setTitle": true,
+        "setFullscreen": true,
+        "setDecorations": true,
+        "setPosition": true,
+        "setSize": true,
+        "setSkipTaskbar": true,
+        "unminimize": true,
+        "startDragging": true,
+        "close": true,
+        "show": true,
+        "hide": true,
+        "minimize": true,
+        "maximize": true
+      },
+      "shell": {
+        "open": true
+      },
+      "clipboard": {
+        "writeText": true,
+        "readText": true
+      },
+      "globalShortcut": {
+        "all": true
+      },
+      "fs": {
+        "all": true,
+        "scope": ["$APPDATA/*", "$DESKTOP/*", "$DOCUMENT/*", "$PICTURE/*"]
+      },
+      "path": {
+        "all": true
+      }
+    },
+    "windows": [
+      {
+        "label": "main",
+        "title": "AI截屏",
+        "width": 1100,
+        "height": 700,
+        "minWidth": 800,
+        "minHeight": 520,
+        "center": true,
+        "focus": true,
+        "decorations": true,
+        "resizable": true,
+        "visible": false
+      },
+      {
+        "label": "float-ball",
+        "title": "",
+        "url": "index.html?window=float-ball",
+        "width": 64,
+        "height": 64,
+        "decorations": false,
+        "resizable": false,
+        "transparent": true,
+        "alwaysOnTop": true,
+        "skipTaskbar": true,
+        "visible": false,
+        "center": false,
+        "x": 0,
+        "y": 100
+      },
+      {
+        "label": "float-ball-panel",
+        "title": "",
+        "url": "index.html?window=float-ball-panel",
+        "width": 360,
+        "height": 480,
+        "decorations": false,
+        "resizable": false,
+        "transparent": true,
+        "alwaysOnTop": true,
+        "skipTaskbar": true,
+        "visible": false,
+        "center": false
+      },
+      {
+        "label": "crop-overlay",
+        "title": "",
+        "width": 800,
+        "height": 600,
+        "decorations": false,
+        "transparent": false,
+        "resizable": false,
+        "alwaysOnTop": true,
+        "skipTaskbar": true,
+        "visible": false,
+        "center": false,
+        "focus": false
+      }
+    ],
+    "security": {
+      "csp": null
+    },
+    "systemTray": {
+      "iconPath": "icons/icon.ico",
+      "iconAsTemplate": true,
+      "menuOnLeftClick": false
+    },
+    "bundle": {
+      "active": true,
+      "icon": [
+        "icons/32x32.png",
+        "icons/128x128.png",
+        "icons/128x128@2x.png",
+        "icons/icon.ico"
+      ],
+      "identifier": "com.aiscreenshot.app",
+      "targets": "nsis",
+      "windows": {
+        "nsis": {
+          "installerIcon": "icons/icon.ico",
+          "installMode": "currentUser"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,12 @@
+node_modules/
+dist/
+src-tauri/target/
+.claude/
+.agents/
+.idea/
+*.log
+.DS_Store
+Thumbs.db
+*_2026*.toml
+*_2026*.rs
+skills-lock.json

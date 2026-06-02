@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#6366f1" />
+    <meta name="color-scheme" content="light dark" />
+    <title>AI截屏</title>
+    <link rel="icon" type="image/svg+xml" href="/icon.svg" />
+    <style>
+      /* Prevent white flash on transparent overlay windows before React mounts */
+      html, body {
+        margin: 0;
+        padding: 0;
+        background: transparent !important;
+        background-color: transparent !important;
+      }
+    </style>
+    <script>
+      // Immediately tag overlay windows so CSS applies before React renders
+      (function() {
+        var params = new URLSearchParams(window.location.search);
+        var win = params.get('window');
+        if (win === 'float-ball') {
+          document.documentElement.classList.add('float-ball-window');
+        } else if (win === 'float-ball-panel') {
+          document.documentElement.classList.add('float-ball-panel-window');
+        } else if (win === 'crop-overlay') {
+          document.documentElement.classList.add('crop-overlay-window');
+        } else {
+          // Main window: set background immediately from localStorage to prevent white flash
+          try {
+            var store = JSON.parse(localStorage.getItem('ai-screenshot-settings-storage') || '{}');
+            var dark = store && store.state && store.state.darkMode;
+            var root = document.getElementById('root');
+            if (root) {
+              root.style.background = dark ? '#111827' : '#ffffff';
+            }
+            if (dark) {
+              document.documentElement.classList.add('dark');
+              document.body.style.background = '#111827';
+              document.body.style.color = '#f3f4f6';
+            } else {
+              document.body.style.background = '#ffffff';
+            }
+          } catch(e) {}
+        }
+      })();
+    </script>
+  </head>
+  <body class="text-gray-900 dark:text-gray-100">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

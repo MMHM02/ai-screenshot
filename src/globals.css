@@ -1,0 +1,359 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-primary: #6366f1;
+  --float-size: 52px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+  font-family: 'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  font-family: 'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Prevent white flash: default to transparent (overlay windows keep this,
+     main window overrides with bg-white via React) */
+  background: transparent;
+}
+
+/* Float ball window - fully transparent, only circle visible.
+   Applied by <script> in index.html BEFORE React mounts. */
+html.float-ball-window,
+html.float-ball-window body,
+html.float-ball-window #root {
+  background: transparent !important;
+  background-color: transparent !important;
+  height: 100% !important;
+  width: 100% !important;
+  overflow: hidden !important;
+}
+
+/* Float ball panel window - rounded corners with shadow.
+   Applied by <script> in index.html BEFORE React mounts. */
+html.float-ball-panel-window,
+html.float-ball-panel-window body,
+html.float-ball-panel-window #root {
+  background: transparent !important;
+  background-color: transparent !important;
+  height: 100% !important;
+  width: 100% !important;
+  overflow: hidden !important;
+}
+
+/* Crop overlay window - opaque dark background.
+   Applied by <script> in index.html BEFORE React mounts. */
+html.crop-overlay-window,
+html.crop-overlay-window body {
+  background: #000 !important;
+  background-color: #000 !important;
+  height: 100% !important;
+  width: 100% !important;
+  overflow: hidden !important;
+}
+
+/* Dark mode text contrast fixes */
+.dark {
+  color-scheme: dark;
+}
+
+.dark body,
+.dark #root {
+  color: #e5e7eb;
+}
+
+.dark .text-gray-400 {
+  color: #9ca3af !important;
+}
+
+.dark .text-gray-500 {
+  color: #a1a5b0 !important;
+}
+
+.dark .text-gray-600 {
+  color: #b0b5c0 !important;
+}
+
+/* 滚动条 */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(128, 128, 128, 0.3);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(128, 128, 128, 0.5);
+}
+
+/* 防止拖拽选中 */
+.no-select {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* 悬浮球发光 */
+.float-ball-glow {
+  box-shadow: 0 0 20px rgba(99, 102, 241, 0.3),
+              0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.float-ball-glow:hover {
+  box-shadow: 0 0 30px rgba(99, 102, 241, 0.5),
+              0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* 消息气泡动画 */
+.message-enter {
+  animation: messageSlideIn 0.25s ease-out;
+}
+
+@keyframes messageSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Markdown 渲染 */
+.markdown-body p {
+  margin-bottom: 0.5rem;
+  font-size: 0.9375rem;
+}
+
+.markdown-body p:last-child {
+  margin-bottom: 0;
+}
+
+.markdown-body pre {
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+  padding: 14px;
+  overflow-x: auto;
+  font-size: 0.875rem;
+}
+
+.dark .markdown-body pre {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.markdown-body code {
+  font-family: 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+  font-size: 0.875rem;
+}
+
+.markdown-body ul, .markdown-body ol {
+  padding-left: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+/* 拖拽区域 */
+.drag-region {
+  -webkit-app-region: drag;
+}
+
+.no-drag {
+  -webkit-app-region: no-drag;
+}
+
+/* UI Polish: Glass morphism utility */
+.glass {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.glass-light {
+  background: rgba(255, 255, 255, 0.7);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.glass-dark {
+  background: rgba(31, 41, 55, 0.7);
+  border-color: rgba(75, 85, 99, 0.3);
+}
+
+/* UI Polish: Smooth transitions */
+.smooth-transition {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* UI Polish: Card styles */
+.card-modern {
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-modern:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+.dark .card-modern {
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* UI Polish: Color picker circles */
+.color-picker-circle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 3px solid transparent;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.color-picker-circle:hover {
+  transform: scale(1.15);
+}
+
+.color-picker-circle.active {
+  border-color: #fff;
+  box-shadow: 0 0 0 3px var(--circle-color, #6366f1), 0 2px 8px rgba(0, 0, 0, 0.2);
+  transform: scale(1.1);
+}
+
+/* Toggle switch animation */
+.toggle-switch {
+  position: relative;
+  width: 42px;
+  height: 24px;
+  border-radius: 12px;
+  transition: background-color 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  border: none;
+  outline: none;
+  padding: 0;
+  appearance: none;
+  -webkit-appearance: none;
+  flex-shrink: 0;
+}
+
+.toggle-switch::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.toggle-switch.off::after {
+  transform: translateX(0);
+}
+
+.toggle-switch.on::after {
+  transform: translateX(18px);
+}
+
+/* Bottom nav bar - glass morphism */
+.bottom-nav {
+  background: rgba(255, 255, 255, 0.45);
+  border-top: 1px solid rgba(128, 128, 128, 0.12);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.dark .bottom-nav {
+  background: rgba(31, 41, 55, 0.45);
+  border-top: 1px solid rgba(75, 85, 99, 0.2);
+}
+
+/* Slider styling */
+input[type="range"] {
+  height: 6px;
+  border-radius: 3px;
+  background: rgba(128, 128, 128, 0.15);
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+  transition: transform 0.15s ease;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+}
+
+/* Color input circle styling */
+input[type="color"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  min-height: 36px;
+  border-radius: 50%;
+  border: 3px solid rgba(128, 128, 128, 0.15);
+  padding: 0;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  overflow: hidden;
+  background: transparent;
+}
+
+input[type="color"]:hover {
+  border-color: rgba(128, 128, 128, 0.3);
+  transform: scale(1.1);
+}
+
+input[type="color"]::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+input[type="color"]::-webkit-color-swatch {
+  border: none;
+  border-radius: 50%;
+  padding: 0;
+}
+
+input[type="color"]::-moz-color-swatch {
+  border: none;
+  border-radius: 50%;
+  padding: 0;
+}
